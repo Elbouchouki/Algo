@@ -14,17 +14,22 @@ graphe["i"] = ["f", "h"];
 const parcourGraphe = (g, racine) => {
   var pere = Array(n);
   var couleur = Array(n);
+  var distance = Array(n);
   var file = [];
   for (let sommet in g) {
     pere[sommet] = null;
     couleur[sommet] = "blanc";
+    // n pour graphe connexe sinon l'infini
+    distance[sommet] = n;
   }
+  distance[racine] = 0;
   file.push(racine);
   while (file.length) {
     const sommet_courant = file[0];
     for (let sommet_voisin of graphe[sommet_courant]) {
       if (couleur[sommet_voisin] === "blanc") {
         couleur[sommet_voisin] = "gris";
+        distance[sommet_voisin] = distance[sommet_courant] + 1;
         file.push(sommet_voisin);
         pere[sommet_voisin] = sommet_courant;
       }
@@ -32,7 +37,6 @@ const parcourGraphe = (g, racine) => {
     file.shift();
     couleur[sommet_courant] = "noir";
   }
-  return pere;
+  return [pere, distance];
 };
-
 console.log(parcourGraphe(graphe, "c"));
