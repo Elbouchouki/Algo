@@ -40,4 +40,31 @@ const parcourGraphe = (g, racine) => {
 
   return [pere, debut, fin];
 };
+
+const parcourGraphe_pile = (g, racine) => {
+  var pere = Array(n);
+  var couleur = Array(n);
+  var distance = Array(n);
+  var pile = [];
+  for (let sommet in g) {
+    pere[sommet] = null;
+    couleur[sommet] = "blanc";
+    distance[sommet] = n;
+  }
+  distance[racine] = 0;
+  pile.push(racine);
+  while (pile.length) {
+    const sommet_courant = pile.pop();
+    for (let sommet_voisin of graphe[sommet_courant]) {
+      if (couleur[sommet_voisin] === "blanc") {
+        couleur[sommet_voisin] = "gris";
+        distance[sommet_voisin] = distance[sommet_courant] + 1;
+        pile.push(sommet_voisin);
+        pere[sommet_voisin] = sommet_courant;
+      }
+    }
+    couleur[sommet_courant] = "noir";
+  }
+  return [pere, distance];
+};
 console.log(parcourGraphe(graphe, "c"));
