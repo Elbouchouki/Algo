@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "cmath": "c"
+        "cmath": "c",
+        "dynamique_array.h": "c",
+        "stdio.h": "c"
     }
 }
