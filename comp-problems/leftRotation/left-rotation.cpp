@@ -6,9 +6,7 @@ vector<int> rotateLeft(int d, vector<int> &arr)
     vector<int> res(arr.size());
     queue<int> q;
     for (int i = 0; i < arr.size(); i++)
-    {
-        }
-
+        q.push(arr[i]);
     for (int i = 0; i < d; i++)
     {
         q.push(q.front());
