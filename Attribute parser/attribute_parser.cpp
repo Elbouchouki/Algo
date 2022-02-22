@@ -27,10 +27,26 @@ int main()
         s.push(stoi(line.substr(4, 1)));
         for (int i = 5; line.size(); i++)
         {
+            string key, value;
+            if (line[i++] == ' ')
+            {
+                while (line[i] != ' ')
+                {
+                    key += line[i++];
                 }
+                i += 3;
+                while (line[i] != '"')
+                {
+                    value += line[i++];
+                }
+                curr.attributes.insert({key, value});
+                i++;
+            }
+        }
     }
     return 0;
 }
+
 // 4 3
 // <tag1 value = "HelloWorld">
 // <tag2 name = "Name1">
