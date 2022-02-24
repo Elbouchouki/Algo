@@ -9,50 +9,48 @@ typedef struct tag
 
 int main()
 {
-    string line;
-    int n, q;
+    int n, q, curr_index;
+    string nullStr;
+    stack<int> tag_stack;
+    vector<tag_t> tag_list;
     cin >> n >> q;
-    stack<int> s;
-    vector<tag_t> tags;
-    int curr_index = 0;
-    while (n)
+    getline(cin, nullStr);
+    for (int v = 0; v < n; v++)
     {
-        cin >> line;
-        if (line[1] == '/')
+        int flag = 1;
+        string temp_line, key, value;
+        getline(cin, temp_line);
+        cout << temp_line;
+        stringstream X(temp_line);
+        // close tag case
+        if (temp_line[1] == '/')
         {
-            s.pop();
+            tag_stack.pop();
+            if (tag_stack.size())
+                cout << temp_line[4] - 1;
+            tag_list[tag_stack.top()].childs.push_back(temp_line[4] - 1);
             continue;
         }
-        tag_t curr;
-        s.push(stoi(line.substr(4, 1)));
-        for (int i = 5; line.size(); i++)
+        getline(X, nullStr, ' ');
+        tag_t curr_tag;
+        while (flag)
         {
-            string key, value;
-            if (line[i++] == ' ')
-            {
-                while (line[i] != ' ')
-                {
-                    key += line[i++];
-                }
-                i += 3;
-                while (line[i] != '"')
-                {
-                    value += line[i++];
-                }
-                curr.attributes.insert({key, value});
-                i++;
-            }
+            getline(X, key, ' ');
+            getline(X, nullStr, ' ');
+            getline(X, value, ' ');
+            curr_tag.attributes.insert({key, value.substr(0, value.length() - 2)});
+            if (value[value.length() - 1] == '>')
+                flag = 0;
         }
+        tag_list.push_back(curr_tag);
     }
+
+    // cout << endl;
+    // while (tag_stack.size())
+    // {
+    //     cout << tag_stack.top() << " ";
+    //     tag_stack.pop();
+    // }
+
     return 0;
 }
-
-// 4 3
-// <tag1 value = "HelloWorld">
-// <tag2 name = "Name1">
-// </tag2>
-// </tag1>
-
-// tag1.tag2~name
-// tag1~name
-// tag1~value
