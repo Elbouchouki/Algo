@@ -1,7 +1,7 @@
 Sample Input
 
 4 3
-<tag1 value = "HelloWorld">
+<tag1 value = "HelloWorld" name = "Name1">
 <tag2 name = "Name1">
 </tag2>
 </tag1>
