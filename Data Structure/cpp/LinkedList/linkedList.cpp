@@ -55,6 +55,12 @@ struct LinkedList
         delete (itr_node);
     }
     /* ---------------------------- comportement FILE --------------------------- */
+    g_type first()
+    {
+    }
+    g_type last()
+    {
+    }
     void enqueue(g_type value)
     {
         struct Node<g_type> *temp_node = new Node<g_type>(value, nullptr);
@@ -114,12 +120,33 @@ struct LinkedList
         return v;
     }
     /* ----------------------------------- end ---------------------------------- */
+    void reverse()
+    {
+        if (length == 0)
+        {
+            cout << "Linkedlist is empty. ";
+            return;
+        }
+        struct Node<g_type> *prev_node = nullptr, *curr_node = head, *next_node = nullptr;
+        while (curr_node != nullptr)
+        {
+            next_node = curr_node->next;
+            curr_node->next = prev_node;
+            prev_node = curr_node;
+            curr_node = next_node;
+        }
+        tail = head;
+        head = prev_node;
+        delete (curr_node);
+        delete (next_node);
+    }
 };
 
 /* ---------------------------------- TEST ---------------------------------- */
 // tester comportement file
 void test_queue()
 {
+    cout << "[!] QUEUE [!]" << endl;
     LinkedList<int> list;
     list.display();
     for (int i = 0; i < 10; i++)
@@ -133,10 +160,12 @@ void test_queue()
         cout << "dequeuing -> " << list.dequeue() << endl;
         list.display();
     }
+    cout << "[!] END QUEUE [!]" << endl;
 }
 // tester comportement pile
 void test_stack()
 {
+    cout << "[!] STACK [!]" << endl;
     LinkedList<int> list;
     list.display();
     for (int i = 0; i < 10; i++)
@@ -150,14 +179,26 @@ void test_stack()
         cout << "poping -> " << list.pop() << endl;
         list.display();
     }
+    cout << "[!] END STACK [!]" << endl;
+}
+void test_reverse()
+{
+    cout << "[!] REVERSE [!]" << endl;
+    LinkedList<int> list;
+    for (int i = 0; i < 10; i++)
+        list.enqueue(i);
+    list.display();
+    list.reverse();
+    list.display();
+    cout << "[!] END REVERSE [!]" << endl;
 }
 /* ----------------------------------- end ---------------------------------- */
 
 /* -------------------------  programme principale ------------------------ */
 int main()
 {
-    // test_stack();
+    test_stack();
     test_queue();
-
+    test_reverse();
     return 0;
 }
