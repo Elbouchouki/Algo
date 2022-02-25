@@ -15,7 +15,8 @@ reverse() = O(n)
 - Clone project : 
   
  ```console
-Elbouchouki:~$ git clone https://github.com/glsidVaccination/backend.git
+Elbouchouki:~$ git clone https://github.com/Elbouchouki/Algorithms.git
+Elbouchouki:~$ cd Algorithms/Data Structure/cpp/LinkedList/
 ```
 
 - Compile program : 
