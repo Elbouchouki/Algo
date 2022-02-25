@@ -23,7 +23,7 @@ struct Node
     }
 };
 
-/* ------------------- structure list simplement chainnee ------------------- */
+/* ------------------- structure list simplement chainee ------------------- */
 template <class g_type>
 struct LinkedList
 {
@@ -57,11 +57,29 @@ struct LinkedList
     /* ---------------------------- comportement FILE --------------------------- */
     void enqueue(g_type value)
     {
+    }
+    g_type dequeue()
+    {
+    }
+    /* ----------------------------------- end ---------------------------------- */
+
+    /* ---------------------------- comportement PILE --------------------------- */
+    void push(g_type value)
+    {
         struct Node<g_type> *temp_node = new Node<g_type>(value, head);
         head = temp_node;
         length++;
     }
-    g_type dequeue()
+    g_type top()
+    {
+        if (length == 0)
+        {
+            cout << "Linkedlist is empty. ";
+            return 0;
+        }
+        return head->value;
+    }
+    g_type pop()
     {
         if (length == 0)
         {
@@ -76,18 +94,6 @@ struct LinkedList
         return v;
     }
     /* ----------------------------------- end ---------------------------------- */
-
-    /* ---------------------------- comportement PILE --------------------------- */
-    void push(g_type value)
-    {
-    }
-    g_type top()
-    {
-    }
-    g_type pop()
-    {
-    }
-    /* ----------------------------------- end ---------------------------------- */
 };
 
 // programme principale
@@ -95,14 +101,14 @@ int main()
 {
     LinkedList<int> list;
     list.display();
-    list.enqueue(1);
-    list.enqueue(2);
+    list.push(1);
+    list.push(2);
     list.display();
-    cout << "dequeued" << list.dequeue() << endl;
+    cout << "dequeued" << list.pop() << endl;
     list.display();
-    list.dequeue();
+    list.pop();
     list.display();
-    list.dequeue();
+    list.pop();
 
     return 0;
 }
