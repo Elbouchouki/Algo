@@ -20,6 +20,20 @@ void display_linkedlist(node_t **head)
     printf("\n");
 }
 
+void reverse_linkedlist(node_t **head)
+{
+    node_t *current = head;
+    node_t *prev = NULL, *next = NULL;
+    while (current != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+}
+
 void add_node(node_t **head, int index, int value)
 {
     node_t *newNode = create_node(value);
