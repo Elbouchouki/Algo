@@ -57,9 +57,29 @@ struct LinkedList
     /* ---------------------------- comportement FILE --------------------------- */
     void enqueue(g_type value)
     {
+        struct Node<g_type> *temp_node = new Node<g_type>(value, nullptr);
+        if (tail == nullptr)
+        {
+            head = temp_node;
+            tail = temp_node;
+            return;
+        }
+        tail->next = temp_node;
+        tail = tail->next;
+        length++;
     }
     g_type dequeue()
     {
+        if (length == 0)
+        {
+            cout << "Linkedlist is empty. ";
+            return 0;
+        }
+        g_type v = head->value;
+        struct Node<g_type> *temp_node = head;
+        head = head->next;
+        delete (temp_node);
+        return v;
     }
     /* ----------------------------------- end ---------------------------------- */
 
@@ -96,19 +116,48 @@ struct LinkedList
     /* ----------------------------------- end ---------------------------------- */
 };
 
-// programme principale
-int main()
+/* ---------------------------------- TEST ---------------------------------- */
+// tester comportement file
+void test_queue()
 {
     LinkedList<int> list;
     list.display();
-    list.push(1);
-    list.push(2);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << "enqueuing: " << i << endl;
+        list.enqueue(i);
+        list.display();
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "dequeuing -> " << list.dequeue() << endl;
+        list.display();
+    }
+}
+// tester comportement pile
+void test_stack()
+{
+    LinkedList<int> list;
     list.display();
-    cout << "dequeued" << list.pop() << endl;
-    list.display();
-    list.pop();
-    list.display();
-    list.pop();
+    for (int i = 0; i < 10; i++)
+    {
+        cout << "pushing: " << i << endl;
+        list.push(i);
+        list.display();
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "poping -> " << list.pop() << endl;
+        list.display();
+    }
+}
+/* ----------------------------------- end ---------------------------------- */
+
+/* -------------------------  programme principale ------------------------ */
+int main()
+{
+    // test_stack();
+    test_queue();
 
     return 0;
 }
