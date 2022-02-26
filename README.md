@@ -11,9 +11,7 @@
 - Bubble Sort [See](Sorts/bubble_sort.cpp)
 - Merge Sort [See](Sorts/merge_sort.cpp)
 
-**Problem solving**
-
-- LinkedList [See](problem%20solving)
+**Problem solving** [See](problem%20solving)
 
 **Mathematical algorithms**
 
