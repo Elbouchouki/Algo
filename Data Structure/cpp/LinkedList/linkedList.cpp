@@ -57,9 +57,21 @@ struct LinkedList
     /* ---------------------------- comportement FILE --------------------------- */
     g_type first()
     {
+        if (length == 0)
+        {
+            cout << "Linkedlist is empty. ";
+            return 0;
+        }
+        return head->value;
     }
     g_type last()
     {
+        if (length == 0)
+        {
+            cout << "Linkedlist is empty. ";
+            return 0;
+        }
+        return tail->value;
     }
     void enqueue(g_type value)
     {
@@ -155,13 +167,14 @@ struct LinkedList
                 index++;
                 temp_node = temp_node->next;
             }
+            delete (temp_node);
         }
         return -1;
     }
     // indice de la derniere occurence d'un element
     int last_index(g_type value)
     {
-        int found_index = -1;
+        int target_index = -1;
         if (length != 0)
         {
             int index = 0;
@@ -170,13 +183,14 @@ struct LinkedList
             {
                 if (temp_node->value == value)
                 {
-                    found_index = index;
+                    target_index = index;
                 }
                 index++;
                 temp_node = temp_node->next;
             }
+            delete (temp_node);
         }
-        return found_index;
+        return target_index;
     }
 };
 
@@ -187,6 +201,7 @@ void test_queue()
     cout << "[!] QUEUE [!]" << endl;
     LinkedList<int> list;
     list.display();
+
     for (int i = 0; i < 10; i++)
     {
         cout << "enqueuing: " << i << endl;
@@ -198,6 +213,8 @@ void test_queue()
         cout << "dequeuing -> " << list.dequeue() << endl;
         list.display();
     }
+    cout << "first element in queue : " << list.first() << endl;
+    cout << "last element in queue : " << list.last() << endl;
     cout << "[!] END QUEUE [!]" << endl;
 }
 // tester comportement pile
@@ -208,8 +225,9 @@ void test_stack()
     list.display();
     for (int i = 0; i < 10; i++)
     {
-        cout << "pushing: " << i << endl;
-        list.push(i);
+        int to_push = rand();
+        cout << "pushing: " << to_push << endl;
+        list.push(to_push);
         list.display();
     }
     for (int i = 0; i < 5; i++)
@@ -257,9 +275,9 @@ void test_first_last()
 /* -------------------------  programme principale ------------------------ */
 int main()
 {
-    // test_stack();
+    test_stack();
     // test_queue();
-    test_reverse();
-    test_first_last();
+    // test_reverse();
+    // test_first_last();
     return 0;
 }
