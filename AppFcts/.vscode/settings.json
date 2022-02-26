@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "appfcts.h": "c",
-        "stdlib.h": "c",
-        "stdio.h": "c",
-        "assert.h": "c"
-    }
-}
