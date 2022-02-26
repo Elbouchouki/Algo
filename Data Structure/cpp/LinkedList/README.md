@@ -1,13 +1,28 @@
 ## Complexities
 
  ```sh
-display() = O(n)
-enqueue() = O(1)
-dequeue() = O(1)
-push()    = O(1)
-top()     = O(1)
-pop()     = O(1)
-reverse() = O(n)
+**queue**
+
+enqueue()            = O(1)
+dequeue()            = O(1)
+first()              = O(1)
+last()               = O(1)
+
+**stack**
+
+push()               = O(1)
+top()                = O(1)
+pop()                = O(1)
+
+**search**
+
+first_index(element) = O(n)
+last_index(element)  = O(n)
+
+**other**
+
+display()            = O(n)
+reverse()            = O(n)
 ```
 
 ## Usage
