@@ -16,8 +16,8 @@ pop()                = O(1)
 
 **search**
 
-first_index(element) = O(n)
-last_index(element)  = O(n)
+first_index() = O(n)
+last_index()  = O(n)
 
 **other**
 
