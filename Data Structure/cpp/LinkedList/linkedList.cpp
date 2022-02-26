@@ -140,6 +140,44 @@ struct LinkedList
         delete (curr_node);
         delete (next_node);
     }
+    /* -------------------------------- recherche ------------------------------- */
+    // indice de la 1ere occurence d'un element
+    int first_index(g_type value)
+    {
+        if (length != 0)
+        {
+            int index = 0;
+            struct Node<g_type> *temp_node = head;
+            while (temp_node != nullptr)
+            {
+                if (temp_node->value == value)
+                    return index;
+                index++;
+                temp_node = temp_node->next;
+            }
+        }
+        return -1;
+    }
+    // indice de la derniere occurence d'un element
+    int last_index(g_type value)
+    {
+        int found_index = -1;
+        if (length != 0)
+        {
+            int index = 0;
+            struct Node<g_type> *temp_node = head;
+            while (temp_node != nullptr)
+            {
+                if (temp_node->value == value)
+                {
+                    found_index = index;
+                }
+                index++;
+                temp_node = temp_node->next;
+            }
+        }
+        return found_index;
+    }
 };
 
 /* ---------------------------------- TEST ---------------------------------- */
@@ -181,24 +219,47 @@ void test_stack()
     }
     cout << "[!] END STACK [!]" << endl;
 }
+// tester le comportement de la fonction reverser
 void test_reverse()
 {
     cout << "[!] REVERSE [!]" << endl;
     LinkedList<int> list;
     for (int i = 0; i < 10; i++)
-        list.enqueue(i);
+        list.enqueue(rand() % 20 + 1);
     list.display();
     list.reverse();
     list.display();
     cout << "[!] END REVERSE [!]" << endl;
+}
+// tester le comportement des fonctions last/first index
+void test_first_last()
+{
+    cout << "[!] FIRST / LAST [!]" << endl;
+    LinkedList<int> list;
+    for (int i = 0; i < 40; i++)
+        list.enqueue(rand() % 10 + 1);
+
+    list.display();
+    for (int i = 0; i < 5; i++)
+    {
+        int to_search = rand() % 20 + 1;
+        cout << "index of first " << to_search << " : " << list.first_index(to_search) << endl;
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        int to_search = rand() % 20 + 1;
+        cout << "index of last " << to_search << " : " << list.last_index(to_search) << endl;
+    }
+    cout << "[!] END FIRST / LAST [!]" << endl;
 }
 /* ----------------------------------- end ---------------------------------- */
 
 /* -------------------------  programme principale ------------------------ */
 int main()
 {
-    test_stack();
-    test_queue();
+    // test_stack();
+    // test_queue();
     test_reverse();
+    test_first_last();
     return 0;
 }
