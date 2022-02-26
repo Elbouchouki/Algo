@@ -11,7 +11,13 @@
 - Bubble Sort [See](Sorts/bubble_sort.cpp)
 - Merge Sort [See](Sorts/merge_sort.cpp)
 
-**Problem solving** [See](problem%20solving)
+**Problem solving** 
+
+- Hackerrank problems [See](problem%20solving/hackerrank)
+- france-ioi problems [See](problem%20solving/france-ioi)
+- other problems [See](problem%20solving/other)
+- c++ Competitive mock [See](problem%20solving/cpp_mock)
+  
 
 **Mathematical algorithms**
 
