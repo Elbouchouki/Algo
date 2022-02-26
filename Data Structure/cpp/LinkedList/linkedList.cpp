@@ -192,6 +192,64 @@ struct LinkedList
         }
         return target_index;
     }
+    /* ------------------------------- suppression ------------------------------ */
+    // supprimer 1ere occurrence d'un element
+    void delete_first(g_type element)
+    {
+        if (length == 0)
+            return;
+        struct Node<g_type> *curr_node = head, *prev_node = nullptr;
+        while (curr_node != nullptr)
+        {
+            if (curr_node->value == element)
+            {
+                if (prev_node == nullptr)
+                    head = head->next;
+                else
+                    prev_node->next = curr_node->next;
+                delete (curr_node);
+                length--;
+                return;
+            }
+            prev_node = curr_node;
+            curr_node = curr_node->next;
+        }
+    }
+    // supprimer toutes les occurrences d'un element
+    void delete_all(g_type element)
+    {
+        if (length == 0)
+            return;
+        struct Node<g_type> *curr_node = head, *prev_node = nullptr, *next_node = nullptr;
+        while (curr_node != nullptr)
+        {
+            // valeur du noeud = element
+            if (curr_node->value == element)
+            {
+                // verifier si l'element se situe dans la tete
+                if (prev_node == nullptr) // dans se cas il faut supprimer la tete
+                {
+                    head = head->next;  // avance la tete d'un pas
+                    delete (curr_node); // desallouer la memoire de la ancienne tete
+                    curr_node = head;   // changer current pour avancer
+                }
+                // l'element ne se situe pas dans la tete
+                else
+                {
+                    prev_node->next = curr_node->next; // suivant d'ancien noeud point sur le suivant du current
+                    delete (curr_node);                // desallouer la memoire du current
+                    curr_node = prev_node->next;       // changer current pour avancer
+                }
+                length--;
+            }
+            // valeur du noeud != element
+            else
+            {
+                prev_node = curr_node;       // avancer prev d'un pas
+                curr_node = curr_node->next; // avancer current d'un pas
+            }
+        }
+    }
 };
 
 /* ---------------------------------- TEST ---------------------------------- */
@@ -270,14 +328,41 @@ void test_first_last()
     }
     cout << "[!] END FIRST / LAST [!]" << endl;
 }
+// tester le comportement des fonctions delete first/all
+void test_delete()
+{
+    cout << "[!] DELETE [!]" << endl;
+    LinkedList<int> list;
+    for (int i = 0; i < 20; i++)
+        list.enqueue(rand() % 10 + 1);
+    list.display();
+
+    for (int i = 0; i < 5; i++)
+    {
+        int elem = rand() % 10 + 1;
+        cout << "supprimer 1ere occurrence de " << elem << endl;
+        list.delete_first(elem);
+        list.display();
+    }
+    cout << "supprimer toutes les occurrence de " << 1 << endl;
+    list.delete_all(1);
+    list.display();
+
+    cout << "supprimer toutes les occurrence de " << 2 << endl;
+    list.delete_all(2);
+    list.display();
+
+    cout << "[!] END DELETE [!]" << endl;
+}
 /* ----------------------------------- end ---------------------------------- */
 
 /* -------------------------  programme principale ------------------------ */
 int main()
 {
-    test_stack();
+    // test_stack();
     // test_queue();
     // test_reverse();
     // test_first_last();
+    test_delete();
     return 0;
 }
