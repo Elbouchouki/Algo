@@ -192,6 +192,8 @@ struct LinkedList
         }
         return target_index;
     }
+    /* ----------------------------------- end ---------------------------------- */
+
     /* ------------------------------- suppression ------------------------------ */
     // supprimer 1ere occurrence d'un element
     void delete_first(g_type element)
@@ -249,6 +251,50 @@ struct LinkedList
                 curr_node = curr_node->next; // avancer current d'un pas
             }
         }
+    }
+    /* ----------------------------------- end ---------------------------------- */
+
+    /* ----------------------------------- tri ---------------------------------- */
+    void sort() // tri par changement de valeur (et non par adresses)
+    {
+        if (length <= 1)
+            return;
+        struct Node<g_type> *curr_node = head, *next_node = nullptr;
+        while (curr_node != nullptr)
+        {
+            next_node = curr_node->next;
+            while (next_node != nullptr)
+            {
+                if (curr_node->value > next_node->value)
+                {
+                    g_type temp = curr_node->value;
+                    curr_node->value = next_node->value;
+                    next_node->value = temp;
+                }
+                next_node = next_node->next;
+            }
+            curr_node = curr_node->next;
+        }
+    }
+
+    void swap(struct Node<g_type> *prev_a, struct Node<g_type> *a, struct Node<g_type> *prev_b, struct Node<g_type> *b)
+    {
+        if (a == nullptr || b == nullptr)
+            return;
+        // a != head
+        if (prev_a != nullptr)
+            prev_a->next = b;
+        else
+            head = b;
+        // b != head
+        if (prev_b != nullptr)
+            prev_b->next = a;
+        else
+            head = a;
+        struct Node<g_type> *temp = b->next;
+        b->next = a->next;
+        a->next = temp;
+        // delete(temp);
     }
 };
 
@@ -354,6 +400,18 @@ void test_delete()
 
     cout << "[!] END DELETE [!]" << endl;
 }
+// tester le comportement du tri
+void test_sort()
+{
+    cout << "[!] SORT [!]" << endl;
+    LinkedList<int> list;
+    for (int i = 0; i < 10; i++)
+        list.enqueue(rand() % 10 + 1);
+    list.display();
+    list.sort();
+    list.display();
+    cout << "[!] END SORT [!]" << endl;
+}
 /* ----------------------------------- end ---------------------------------- */
 
 /* -------------------------  programme principale ------------------------ */
@@ -363,6 +421,7 @@ int main()
     // test_queue();
     // test_reverse();
     // test_first_last();
-    test_delete();
+    // test_delete();
+    test_sort();
     return 0;
 }
