@@ -37,6 +37,11 @@ delete_all()   = {
     worst case :  O(n)
 }
 
+**sort**
+
+sort()         = O(n^2)
+swap()         = O(1)
+
 **other**
 
 display()      = O(n)
