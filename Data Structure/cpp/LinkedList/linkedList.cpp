@@ -296,6 +296,18 @@ struct LinkedList
         a->next = temp;
         // delete(temp);
     }
+
+    // merge sort
+    void merge_sort()
+    {
+    }
+    void find_middle()
+    {
+    }
+    void merged_sort()
+    {
+    }
+    // end merge sort
 };
 
 /* ---------------------------------- TEST ---------------------------------- */
