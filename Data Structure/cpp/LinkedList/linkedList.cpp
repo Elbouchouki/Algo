@@ -153,8 +153,20 @@ struct LinkedList
         delete (next_node);
     }
     /* -------------------------------- recherche ------------------------------- */
+    struct Node<g_type> *find_node(g_type value)
+    {
+        struct Node<g_type> *temp_node = head;
+        while (temp_node != nullptr)
+        {
+            if (temp_node->value == value)
+                return temp_node;
+            temp_node = temp_node->next;
+        }
+        return nullptr;
+    }
     // indice de la 1ere occurence d'un element
-    int first_index(g_type value)
+    int
+    first_index(g_type value)
     {
         if (length != 0)
         {
@@ -298,16 +310,17 @@ struct LinkedList
     }
 
     // merge sort
-    void merge_sort()
-    {
-    }
-    void find_middle()
-    {
-    }
-    void merged_sort()
-    {
-    }
+    // void merge_sort()
+    // {
+    // }
+    // void find_middle()
+    // {
+    // }
+    // void merged_sort()
+    // {
+    // }
     // end merge sort
+    /* ----------------------------------- end ---------------------------------- */
 };
 
 /* ---------------------------------- TEST ---------------------------------- */
@@ -366,9 +379,9 @@ void test_reverse()
     cout << "[!] END REVERSE [!]" << endl;
 }
 // tester le comportement des fonctions last/first index
-void test_first_last()
+void test_search()
 {
-    cout << "[!] FIRST / LAST [!]" << endl;
+    cout << "[!] SEARCH [!]" << endl;
     LinkedList<int> list;
     for (int i = 0; i < 40; i++)
         list.enqueue(rand() % 10 + 1);
@@ -384,7 +397,18 @@ void test_first_last()
         int to_search = rand() % 20 + 1;
         cout << "index of last " << to_search << " : " << list.last_index(to_search) << endl;
     }
-    cout << "[!] END FIRST / LAST [!]" << endl;
+    struct Node<int> *temp_node = list.find_node(5);
+    if (temp_node)
+        cout << temp_node->value << endl;
+    else
+        cout << "5 Not found" << endl;
+    temp_node = list.find_node(55);
+    if (temp_node)
+        cout << temp_node->value << endl;
+    else
+        cout << "55 Not found" << endl;
+
+    cout << "[!] END SEARCH [!]" << endl;
 }
 // tester le comportement des fonctions delete first/all
 void test_delete()
@@ -432,8 +456,8 @@ int main()
     // test_stack();
     // test_queue();
     // test_reverse();
-    // test_first_last();
+    test_search();
     // test_delete();
-    test_sort();
+    // test_sort();
     return 0;
 }
