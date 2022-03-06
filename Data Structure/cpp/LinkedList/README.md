@@ -16,23 +16,28 @@ pop()          = O(1)
 
 **search**
 
-first_index()  = {
+find_node()    : struct Node* = {
     best  case :  O(1)
     worst case :  O(n)
 }
 
-last_index()   = {
+first_index()  : int = {
+    best  case :  O(1)
+    worst case :  O(n)
+}
+
+last_index()   : int = {
     best  case :  O(n)
     worst case :  O(n)
 }
 
 **suppression**
 
-delete_first() = {
+delete_first() : void = {
     best  case :  O(1)
     worst case :  O(n)
 }
-delete_all()   = {
+delete_all()   : void = {
     best  case :  O(n)
     worst case :  O(n)
 }
