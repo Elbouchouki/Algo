@@ -32,7 +32,7 @@ last_index()   : int = {
 }
 
 **suppression**
-
+ 
 delete_first() : void = {
     best  case :  O(1)
     worst case :  O(n)
