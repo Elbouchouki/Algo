@@ -30,8 +30,8 @@ struct Monome
 template <class poly_type>
 struct Polynome
 {
-    Monome *head;
-    Monome *tail;
+    Monome<poly_type> *head;
+    Monome<poly_type> *tail;
 
     Polynome()
     {
@@ -43,10 +43,10 @@ struct Polynome
         if (head != tail)
         {
             Monome<poly_type> *tmp = head;
-            while (tmp->suivant != tail)
+            while (tmp->suivant->suivant != nullptr)
                 tmp = tmp->suivant;
-            delete (tail);
-            tail = temp;
+            tail = tmp;
+            delete (tail->suivant);
             return;
         }
 
@@ -56,23 +56,23 @@ struct Polynome
     {
         assert(deg >= 0);
         // Polynome est vide
-        if (this.head == nullptr)
+        if (this->head == nullptr)
         {
-            Monome *new_monome = new Monome<poly_type>(coeff, deg);
-            this.head = this.tail = new_monome;
+            Monome<poly_type> *new_monome = new Monome<poly_type>(coeff, deg);
+            this->head = this->tail = new_monome;
             return;
         }
 
         // Monome a ajouté est <= plys petit monome du polynome || ajout au début
-        if (this.head->deg >= deg)
+        if (this->head->deg >= deg)
         {
             // test d'egalité
-            if (this.head->deg == deg)
+            if (this->head->deg == deg)
             {
                 // test de suppression ou ajout
-                if (this.head->coeff == -coeff)
+                if (this->head->coeff == -coeff)
                 {
-                    Monome *sup_monome = head;
+                    Monome<poly_type> *sup_monome = head;
                     head = head->suivant;
                     delete (sup_monome);
                 }
@@ -80,25 +80,28 @@ struct Polynome
                     head->coeff += coeff;
                 return;
             }
-            Monome *new_monome = new Monome<poly_type>(coeff, deg, head);
+            Monome<poly_type> *new_monome = new Monome<poly_type>(coeff, deg, head);
             head = new_monome;
             return;
         }
 
         // Monome a ajouté est >= plus grand monome du polynome || ajout à la fin
-        if (this.tail->deg <= new_monome->deg)
+        if (this->tail->deg <= deg)
         {
             // test d'egalité
-            if (this.head->deg == deg)
+            if (this->tail->deg == deg)
             {
                 // test de suppression ou ajout
-                if (this.head->coeff == -coeff)
-                    this.delete_tail();
+                if (this->tail->coeff == -coeff)
+                {
+                    delete_tail();
+                    return;
+                }
                 else
                     tail->coeff += coeff;
                 return;
             }
-            Monome *new_monome = new Monome<poly_type>(coeff, deg);
+            Monome<poly_type> *new_monome = new Monome<poly_type>(coeff, deg);
             tail->suivant = new_monome;
             tail = new_monome;
             return;
@@ -121,23 +124,53 @@ struct Polynome
             return;
         }
 
-        Monome<poly_type> *new_monome = new Monome(deg, coeff, curr->suivant);
+        Monome<poly_type> *new_monome = new Monome<poly_type>(deg, coeff, curr->suivant);
         curr->suivant = new_monome;
     }
-    string to_string()
+    string toString()
     {
         string rt = "";
-        if (head != tail)
+        if (head != nullptr)
         {
             Monome<poly_type> *curr = head;
             while (curr != nullptr)
             {
-                to_string(curr->coeff)
+                if (curr != head)
+                    rt += " + ";
+                rt += to_string(curr->coeff);
+                rt += "x^";
+                rt += to_string(curr->deg);
+                curr = curr->suivant;
             }
         }
+        return rt;
     }
 };
 
+void test_insert()
+{
+    Polynome<double> poly = Polynome<double>();
+    poly.insert(1, 1);
+    cout << poly.tail->deg << endl;
+    poly.insert(2, 2);
+    cout << poly.tail->deg << endl;
+    poly.insert(3, 3);
+    cout << poly.tail->deg << endl;
+    poly.insert(4, 4);
+    cout << poly.tail->deg << endl;
+    cout << poly.toString() << endl;
+    poly.insert(1, 1);
+    poly.insert(2, 2);
+    poly.insert(3, 3);
+    poly.insert(4, 4);
+    cout << poly.toString() << endl;
+    poly.insert(-8, 4);
+    cout << poly.tail->deg << endl;
+    cout << poly.toString() << endl;
+}
+
 int main()
 {
+    test_insert();
+    return 0;
 }
