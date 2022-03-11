@@ -28,8 +28,8 @@ template <class g_type>
 struct LinkedList
 {
     // attribues
-    struct Node<g_type> *head;
-    struct Node<g_type> *tail;
+    Node<g_type> *head;
+    Node<g_type> *tail;
     size_t length;
     // initialiser la list (creation)
     LinkedList()
@@ -45,7 +45,7 @@ struct LinkedList
             cout << "Empty." << endl;
             return;
         }
-        struct Node<g_type> *itr_node = head;
+        Node<g_type> *itr_node = head;
         while (itr_node != nullptr)
         {
             cout << itr_node->value << " ";
@@ -75,7 +75,7 @@ struct LinkedList
     }
     void enqueue(g_type value)
     {
-        struct Node<g_type> *temp_node = new Node<g_type>(value, nullptr);
+        Node<g_type> *temp_node = new Node<g_type>(value, nullptr);
         if (tail == nullptr)
         {
             head = temp_node;
@@ -94,7 +94,7 @@ struct LinkedList
             return 0;
         }
         g_type v = head->value;
-        struct Node<g_type> *temp_node = head;
+        Node<g_type> *temp_node = head;
         head = head->next;
         delete (temp_node);
         return v;
@@ -104,7 +104,7 @@ struct LinkedList
     /* ---------------------------- comportement PILE --------------------------- */
     void push(g_type value)
     {
-        struct Node<g_type> *temp_node = new Node<g_type>(value, head);
+        Node<g_type> *temp_node = new Node<g_type>(value, head);
         head = temp_node;
         length++;
     }
@@ -124,8 +124,8 @@ struct LinkedList
             cout << "Linkedlist is empty. ";
             return 0;
         }
-        g_type v = head->value;                // conserver la valeur de l'element a supprimer.
-        struct Node<g_type> *temp_node = head; // conserver le noeud a supprimer pour le supprimer de la memoire.
+        g_type v = head->value;         // conserver la valeur de l'element a supprimer.
+        Node<g_type> *temp_node = head; // conserver le noeud a supprimer pour le supprimer de la memoire.
         head = head->next;
         delete (temp_node);
         length--;
@@ -139,7 +139,7 @@ struct LinkedList
             cout << "Linkedlist is empty. ";
             return;
         }
-        struct Node<g_type> *prev_node = nullptr, *curr_node = head, *next_node = nullptr;
+        Node<g_type> *prev_node = nullptr, *curr_node = head, *next_node = nullptr;
         while (curr_node != nullptr)
         {
             next_node = curr_node->next;
@@ -153,9 +153,9 @@ struct LinkedList
         delete (next_node);
     }
     /* -------------------------------- recherche ------------------------------- */
-    struct Node<g_type> *find_node(g_type value)
+    Node<g_type> *find_node(g_type value)
     {
-        struct Node<g_type> *temp_node = head;
+        Node<g_type> *temp_node = head;
         while (temp_node != nullptr)
         {
             if (temp_node->value == value)
@@ -171,7 +171,7 @@ struct LinkedList
         if (length != 0)
         {
             int index = 0;
-            struct Node<g_type> *temp_node = head;
+            Node<g_type> *temp_node = head;
             while (temp_node != nullptr)
             {
                 if (temp_node->value == value)
@@ -190,7 +190,7 @@ struct LinkedList
         if (length != 0)
         {
             int index = 0;
-            struct Node<g_type> *temp_node = head;
+            Node<g_type> *temp_node = head;
             while (temp_node != nullptr)
             {
                 if (temp_node->value == value)
@@ -212,7 +212,7 @@ struct LinkedList
     {
         if (length == 0)
             return;
-        struct Node<g_type> *curr_node = head, *prev_node = nullptr;
+        Node<g_type> *curr_node = head, *prev_node = nullptr;
         while (curr_node != nullptr)
         {
             if (curr_node->value == element)
@@ -234,7 +234,7 @@ struct LinkedList
     {
         if (length == 0)
             return;
-        struct Node<g_type> *curr_node = head, *prev_node = nullptr, *next_node = nullptr;
+        Node<g_type> *curr_node = head, *prev_node = nullptr, *next_node = nullptr;
         while (curr_node != nullptr)
         {
             // valeur du noeud = element
@@ -271,7 +271,7 @@ struct LinkedList
     {
         if (length <= 1)
             return;
-        struct Node<g_type> *curr_node = head, *next_node = nullptr;
+        Node<g_type> *curr_node = head, *next_node = nullptr;
         while (curr_node != nullptr)
         {
             next_node = curr_node->next;
@@ -289,7 +289,7 @@ struct LinkedList
         }
     }
 
-    void swap(struct Node<g_type> *prev_a, struct Node<g_type> *a, struct Node<g_type> *prev_b, struct Node<g_type> *b)
+    void swap(Node<g_type> *prev_a, Node<g_type> *a, Node<g_type> *prev_b, Node<g_type> *b)
     {
         if (a == nullptr || b == nullptr)
             return;
@@ -303,7 +303,7 @@ struct LinkedList
             prev_b->next = a;
         else
             head = a;
-        struct Node<g_type> *temp = b->next;
+        Node<g_type> *temp = b->next;
         b->next = a->next;
         a->next = temp;
         // delete(temp);
@@ -397,7 +397,7 @@ void test_search()
         int to_search = rand() % 20 + 1;
         cout << "index of last " << to_search << " : " << list.last_index(to_search) << endl;
     }
-    struct Node<int> *temp_node = list.find_node(5);
+    Node<int> *temp_node = list.find_node(5);
     if (temp_node)
         cout << temp_node->value << endl;
     else
