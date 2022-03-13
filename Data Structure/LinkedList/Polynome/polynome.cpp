@@ -127,6 +127,45 @@ struct Polynome
         Monome<poly_type> *new_monome = new Monome<poly_type>(deg, coeff, curr->suivant);
         curr->suivant = new_monome;
     }
+    Polynome<poly_type> addition(Polynome<poly_type> &poly)
+    {
+        Polynome<poly_type> result = Polynome<poly_type>();
+        Monome<poly_type> *curr = head;
+        Monome<poly_type> *curr_poly = poly.head;
+
+        while (curr != nullptr && curr_poly != nullptr)
+        {
+            if (curr->deg == curr_poly->deg)
+            {
+                result.insert(curr->deg, curr->coeff + curr_poly->coeff);
+                curr = curr->suivant;
+                curr_poly = curr_poly->suivant;
+                continue;
+            }
+            if (curr->deg > curr_poly->deg)
+            {
+                result.insert(curr->deg, curr->coeff);
+                curr = curr->suivant;
+            }
+            else
+            {
+                result.insert(curr_poly->deg, curr_poly->coeff);
+                curr_poly = curr_poly->suivant;
+            }
+        }
+        while (curr != nullptr)
+        {
+            result.insert(curr->deg, curr->coeff);
+            curr = curr->suivant;
+        }
+        while (curr_poly != nullptr)
+        {
+            result.insert(curr_poly->deg, curr_poly->coeff);
+            curr_poly = curr_poly->suivant;
+        }
+        cout << result.toString() << endl;
+        return result;
+    }
     string toString()
     {
         string rt = "";
@@ -146,6 +185,25 @@ struct Polynome
         return rt;
     }
 };
+
+void test_addition()
+{
+    Polynome<double> poly_1 = Polynome<double>();
+    poly_1.insert(1, 1);
+    poly_1.insert(1, 2);
+    poly_1.insert(1, 3);
+    poly_1.insert(1, 4);
+    Polynome<double> poly_2 = Polynome<double>();
+    poly_2.insert(1, 2);
+    poly_2.insert(1, 3);
+    poly_2.insert(1, 4);
+    poly_2.insert(1, 5);
+    poly_2.insert(1, 6);
+    Polynome<double> poly_3 = poly_1.addition(poly_2);
+    cout << poly_1.toString() << endl;
+    cout << poly_2.toString() << endl;
+    cout << poly_3.toString() << endl;
+}
 
 void test_insert()
 {
@@ -171,6 +229,7 @@ void test_insert()
 
 int main()
 {
-    test_insert();
+    // test_insert();
+    test_addition();
     return 0;
 }
