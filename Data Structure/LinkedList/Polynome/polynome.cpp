@@ -49,7 +49,6 @@ struct Polynome
             delete (tail->suivant);
             return;
         }
-
         delete (tail);
     }
     void insert(poly_type coeff, int deg)
@@ -127,6 +126,8 @@ struct Polynome
         Monome<poly_type> *new_monome = new Monome<poly_type>(deg, coeff, curr->suivant);
         curr->suivant = new_monome;
     }
+
+    /* -------------------------------- addition -------------------------------- */
     Polynome<poly_type> addition(Polynome<poly_type> &poly)
     {
         Polynome<poly_type> result = Polynome<poly_type>();
@@ -223,13 +224,13 @@ void test_insert()
     poly.insert(4, 4);
     cout << poly.toString() << endl;
     poly.insert(-8, 4);
-    cout << poly.tail->deg << endl;
     cout << poly.toString() << endl;
+    cout << poly.tail->deg << endl;
 }
 
 int main()
 {
-    // test_insert();
-    test_addition();
+    test_insert();
+    // test_addition();
     return 0;
 }
