@@ -3,17 +3,10 @@ using namespace std;
 
 int lonelyinteger(vector<int> a)
 {
-    set<int> ss;
-    int ret;
+    int res = 0;
     for (size_t i = 0; i < a.size(); i++)
-    {
-        if (ss.find(a[i]) == ss.end())
-        {
-            ss.insert(a[i]);
-            ret = a[i];
-        }
-    }
-    return ret;
+        res = res ^ a[i];
+    return res;
 }
 
 int main()
