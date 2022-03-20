@@ -132,7 +132,7 @@ struct LinkedList
         return v;
     }
     /* ----------------------------------- end ---------------------------------- */
-    void reverse()
+    void reverse_itr()
     {
         if (length == 0)
         {
@@ -151,6 +151,26 @@ struct LinkedList
         head = prev_node;
         delete (curr_node);
         delete (next_node);
+    }
+
+    void reverse_rec()
+    {
+        reverse(head);
+    }
+
+    Node<g_type> *reverse(Node<g_type> *curr_head)
+    {
+        if (curr_head == nullptr)
+            return nullptr;
+        if (curr_head->next == nullptr)
+        {
+            head = curr_head;
+            return curr_head;
+        }
+        Node<g_type> *node1 = reverse(curr_head->next);
+        node1->next = curr_head;
+        curr_head->next = nullptr;
+        return curr_head;
     }
     /* -------------------------------- recherche ------------------------------- */
     Node<g_type> *find_node(g_type value)
@@ -374,7 +394,8 @@ void test_reverse()
     for (int i = 0; i < 10; i++)
         list.enqueue(rand() % 20 + 1);
     list.display();
-    list.reverse();
+    list.reverse_rec();
+    // list.reverse_itr();
     list.display();
     cout << "[!] END REVERSE [!]" << endl;
 }
@@ -455,8 +476,8 @@ int main()
 {
     // test_stack();
     // test_queue();
-    // test_reverse();
-    test_search();
+    test_reverse();
+    // test_search();
     // test_delete();
     // test_sort();
     return 0;
