@@ -84,10 +84,13 @@ void test_chx()
     vector<double> x, fx;
     IntegrationNumerique integration = IntegrationNumerique();
     const double chx = 1.766973094451878;
-    double gap = 0.1;
+    double gap = 00;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
+        gap += 0.1;
+        if (i == 2)
+            continue;
         double cpt = 1;
         while (cpt <= 1.81)
         {
@@ -105,7 +108,6 @@ void test_chx()
         cout << endl;
         x.clear();
         fx.clear();
-        gap += 0.1;
     }
 }
 void test_vitesse()
@@ -119,6 +121,6 @@ void test_vitesse()
 
 int main()
 {
-    test_vitesse();
+    test_chx();
     return 0;
 }
