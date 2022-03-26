@@ -1,7 +1,10 @@
 ## Structure
 **Data Structure**
 
-- LinkedList [See](Data%20Structure/cpp/LinkedList)
+- LinkedList [See](Data%20Structure/LinkedList)
+- Stack [See](Data%20Structure/Stack)
+- Queue [See](Data%20Structure/Queue)
+- Deque [See](Data%20Structure/Deque)
 
 **Sorting algorithms**
 
