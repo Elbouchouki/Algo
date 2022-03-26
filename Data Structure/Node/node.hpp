@@ -8,6 +8,8 @@ private:
     type_g value;
     node *next;
 
+    node *prev; // for deque
+
 public:
     node()
     {
@@ -28,10 +30,17 @@ public:
     {
         this->next = next;
     }
-
+    void setPrev(node<type_g> *prev)
+    {
+        this->prev = prev;
+    }
     node<type_g> *getNext()
     {
         return this->next;
+    }
+    node<type_g> *getPrev()
+    {
+        return this->prev;
     }
 
     void setVal(type_g value)
