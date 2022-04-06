@@ -5,14 +5,14 @@ using namespace std;
 class Solution {
 public:
     static vector<int> twoSum(vector<int>& nums, int target) {
-        map<int,int> m;
+        unordered_map<int,int> m;
         for(int i=0 ; i<nums.size() ; i++){
             if( m.find(target - nums[i]) != m.end() ){
                 return vector<int>({m[target - nums[i]],i});
             }
-            m.insert({nums[i],i});
+            m[nums[i]]=i;
         }
-        return vector<int>();
+        return {};
     }
 };
 
