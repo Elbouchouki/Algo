@@ -1,0 +1,11 @@
+Enter degree of polynomial: 
+Enter coefficient of x^0: 
+Enter coefficient of x^1: 
+Enter coefficient of x^2: 
+Beauty = 51
+
+Enter degree of polynomial: 
+Enter coefficient of x^0: 
+Enter coefficient of x^1: 
+Beauty = 3
+
