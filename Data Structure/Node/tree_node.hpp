@@ -14,16 +14,19 @@ public:
     {
         this->value = 0;
         this->right = nullptr;
+        this->left = nullptr;
     }
     tree_node(type_g value)
     {
         this->value = value;
         this->right = nullptr;
+        this->left = nullptr;
     }
-    tree_node(type_g value, tree_node<type_g> *right)
+    tree_node(type_g value, tree_node<type_g> *left, tree_node<type_g> *right)
     {
         this->value = value;
         this->right = right;
+        this->left = left;
     }
     void setRight(tree_node<type_g> *right)
     {
@@ -41,15 +44,22 @@ public:
     {
         return this->left;
     }
-
     void setVal(type_g value)
     {
         this->value = value;
     }
-
     type_g getVal()
     {
         return value;
+    }
+    bool hasRight() const{
+        return this->right != nullptr;
+    }
+    bool hasLeft() const{
+        return this->left != nullptr;
+    }
+    bool operator<(tree_node<g_type> & node){
+        return this->value < node.value;
     }
 };
 
