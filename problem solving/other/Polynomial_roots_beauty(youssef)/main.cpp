@@ -16,6 +16,9 @@ int main()
     freopen("error.txt", "w", stderr);
     freopen("output.txt", "w", stdout);
 #endif
+    // clock_t start = clock();
+    auto start = chrono::system_clock::now();
+
 
     int t = 1;
     cin >> t;
@@ -24,8 +27,10 @@ int main()
         solve();
         cout << "\n";
     }
+    auto end = std::chrono::system_clock::now();
+    cerr << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << std::endl;
 
-    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
+    // cerr << "time taken : " << float(clock() - start) / CLOCKS_PER_SEC << " secs" << endl;
     return 0;
 }
 

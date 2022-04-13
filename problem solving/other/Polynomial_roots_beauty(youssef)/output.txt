@@ -2,10 +2,46 @@ Enter degree of polynomial:
 Enter coefficient of x^0: 
 Enter coefficient of x^1: 
 Enter coefficient of x^2: 
-Beauty = 51
-
-Enter degree of polynomial: 
-Enter coefficient of x^0: 
-Enter coefficient of x^1: 
-Beauty = 3
+Enter coefficient of x^3: 
+Enter coefficient of x^4: 
+Enter coefficient of x^5: 
+Enter coefficient of x^6: 
+Enter coefficient of x^7: 
+Enter coefficient of x^8: 
+Enter coefficient of x^9: 
+Enter coefficient of x^10: 
+Enter coefficient of x^11: 
+Enter coefficient of x^12: 
+Enter coefficient of x^13: 
+Enter coefficient of x^14: 
+Enter coefficient of x^15: 
+Enter coefficient of x^16: 
+Enter coefficient of x^17: 
+Enter coefficient of x^18: 
+Enter coefficient of x^19: 
+Enter coefficient of x^20: 
+Enter coefficient of x^21: 
+Enter coefficient of x^22: 
+Enter coefficient of x^23: 
+Enter coefficient of x^24: 
+Enter coefficient of x^25: 
+Enter coefficient of x^26: 
+Enter coefficient of x^27: 
+Enter coefficient of x^28: 
+Enter coefficient of x^29: 
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Not converged
+Beauty = 496
 
