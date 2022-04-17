@@ -36,11 +36,11 @@ public:
     {
         this->left = left;
     }
-    tree_node<type_g> *getRight()
+    tree_node<type_g> *getRight() const
     {
         return this->right;
     }
-    tree_node<type_g> *getLeft()
+    tree_node<type_g> *getLeft() const
     {
         return this->left;
     }
@@ -58,7 +58,10 @@ public:
     bool hasLeft() const{
         return this->left != nullptr;
     }
-    bool operator<(tree_node<g_type> & node){
+    bool isLeaf() const{
+        return (this->right == nullptr) && (this->left == nullptr);
+    }
+    bool operator<(tree_node<type_g> & node){
         return this->value < node.value;
     }
 };
