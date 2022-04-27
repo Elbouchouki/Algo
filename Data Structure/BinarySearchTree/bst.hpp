@@ -1,7 +1,7 @@
 #if !defined(BST)
 #define BST
 
-#include "../../Node/tree_node.hpp"
+#include "../Node/tree_node.hpp"
 #include <iostream>
 
 using namespace std;
